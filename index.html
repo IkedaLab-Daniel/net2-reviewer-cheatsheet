@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCNA 2 Module Cheatsheets</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 CCNA 2 Module Cheatsheets</h1>
+            <p>Quick reference guides for Cisco CCNA 2 modules</p>
+        </header>
+
+        <nav class="module-nav">
+            <button class="module-btn active" data-module="1">Module 1: Basic Device Config</button>
+            <button class="module-btn" data-module="2">Module 2: Switching Concepts</button>
+            <button class="module-btn" data-module="3">Module 3: VLANs</button>
+            <button class="module-btn" data-module="4">Module 4: Inter-VLAN Routing</button>
+            <button class="module-btn" data-module="5">Module 5: Spanning Tree</button>
+            <button class="module-btn" data-module="6">Module 6: EtherChannel</button>
+        </nav>
+
+        <main class="content-area">
+            <div id="loading">Loading module content...</div>
+            <div id="module-content"></div>
+        </main>
+
+        <footer>
+            <p>CCNA 2 Study Guide • Created for exam preparation</p>
+        </footer>
+    </div>
+
+    <script>
+        // Module content storage
+        const moduleContent = {};
+
+        // Markdown-like content for each module (embedded in JS for simplicity)
+        moduleContent[1] = `
+## ⚡ CCNA 2 – Module 1 Cheatsheet: *Basic Device Configuration*
+
+---
+
+### 🧠 **1. Core Concepts to Remember**
+
+| Concept                                 | Description                                                         |
+| --------------------------------------- | ------------------------------------------------------------------- |
+| **Switch Boot Sequence**                | 1️⃣ POST → 2️⃣ Boot loader → 3️⃣ Load IOS → 4️⃣ Load startup-config |
+| **POST (Power-On Self Test)**           | Hardware diagnostic run by the switch on boot.                      |
+| **Boot Loader**                         | Small program that loads the Cisco IOS into RAM.                    |
+| **IOS (Internetwork Operating System)** | The OS that controls switch/router operation.                       |
+| **Startup-config**                      | Saved configuration stored in NVRAM.                                |
+| **Running-config**                      | Active configuration stored in RAM.                                 |
+| **VLAN 1**                              | Default management VLAN on Cisco switches.                          |
+
+---
+
+### 🔐 **2. Security and Access**
+
+| Feature                 | Command / Note                                                                                      |
+| ----------------------- | --------------------------------------------------------------------------------------------------- |
+| **Console Access**      | \`line console 0\` → \`password [pass]\` → \`login\`                                                      |
+| **VTY (Remote) Access** | \`line vty 0 4\` → \`password [pass]\` → \`login\`                                                        |
+| **Enable Secret**       | \`enable secret [pass]\` → encrypted privileged password                                              |
+| **Banner MOTD**         | \`banner motd # Unauthorized Access Prohibited #\`                                                    |
+| **Password Encryption** | \`service password-encryption\`                                                                       |
+| **SSH (Secure Shell)**  | Used instead of Telnet for secure remote access.                                                    |
+| **SSH Config Steps**    | \`ip domain-name\`, \`crypto key generate rsa\`, \`username [user] secret [pass]\`, \`transport input ssh\` |
+
+---
+
+### 🌐 **3. Switch Management Interface**
+
+| Concept             | Description / Command                                                          |
+| ------------------- | ------------------------------------------------------------------------------ |
+| **Management IP**   | Assigns an IP to the switch for remote management via VLAN 1.                  |
+| **Command:**        | \`interface vlan 1 ip address 192.168.1.2 255.255.255.0 no shutdown\`            |
+| **Default Gateway** | Required for managing switch across networks: \`ip default-gateway 192.168.1.1\` |
+| **Verify IP**       | \`show ip interface brief\`                                                      |
+
+---
+
+### ⚙️ **4. Configuration Commands**
+
+| Action              | Command                              |
+| ------------------- | ------------------------------------ |
+| View running config | \`show running-config\`                |
+| Save config         | \`copy running-config startup-config\` |
+| View version info   | \`show version\`                       |
+| View MAC address    | \`show mac address-table\`             |
+| Clear MAC table     | \`clear mac address-table\`            |
+| Reboot device       | \`reload\`                             |
+| Delete config       | \`erase startup-config\`               |
+
+---
+
+### 🧩 **5. Device Modes**
+
+| Mode                 | Prompt                 | Purpose                                      |
+| -------------------- | ---------------------- | -------------------------------------------- |
+| **User EXEC**        | \`Switch>\`              | Limited access; basic monitoring only.       |
+| **Privileged EXEC**  | \`Switch#\`              | Access to all show commands & debugging.     |
+| **Global Config**    | \`Switch(config)#\`      | Configure system-wide settings.              |
+| **Interface Config** | \`Switch(config-if)#\`   | Configure a specific port or VLAN interface. |
+| **Line Config**      | \`Switch(config-line)#\` | Configure console, vty, or aux lines.        |
+
+---
+
+### ⚡ **6. Key Files and Memory Locations**
+
+| Memory    | Description                                       |
+| --------- | ------------------------------------------------- |
+| **NVRAM** | Stores \`startup-config\`.                          |
+| **RAM**   | Holds \`running-config\` and IOS in use.            |
+| **Flash** | Stores IOS image and other files.                 |
+| **ROM**   | Contains boot loader & basic diagnostic software. |
+
+---
+
+### 📶 **7. Useful Verification Commands**
+
+| Command                   | Use                                          |
+| ------------------------- | -------------------------------------------- |
+| \`show ip interface brief\` | Displays interface status & IPs.             |
+| \`show interfaces status\`  | Displays port mode (access/trunk) and VLANs. |
+| \`show history\`            | Shows previously entered commands.           |
+| \`show users\`              | Displays who's logged in.                    |
+| \`show version\`            | Shows IOS version, uptime, hardware details. |
+| \`ping\` / \`traceroute\`     | Tests network connectivity.                  |
+
+---
+
+### 💡 **8. Common Troubleshooting Tips**
+
+| Problem                      | Check                                            |
+| ---------------------------- | ------------------------------------------------ |
+| **Can't ping switch**        | Verify VLAN 1 IP and default gateway.            |
+| **SSH not working**          | Check RSA key, domain name, and vty settings.    |
+| **Config lost after reboot** | Save it! → \`copy running-config startup-config\`. |
+| **Interface down**           | Run \`no shutdown\` under the interface.           |
+
+---
+
+### ⚙️ **9. Essential Terminology**
+
+| Term                 | Meaning                                                 |
+| -------------------- | ------------------------------------------------------- |
+| **MAC Address**      | Unique physical address of a NIC.                       |
+| **Port Security**    | Limits devices per switch port to prevent MAC flooding. |
+| **Base MAC Address** | Switch's burned-in MAC used for management.             |
+| **Duplex**           | Determines if device can send/receive simultaneously.   |
+| **Speed**            | Defines data rate of the interface.                     |
+
+---
+
+### 🧩 **10. Memorize These Shortcuts**
+
+| Shortcut   | Description                    |
+| ---------- | ------------------------------ |
+| \`Ctrl + A\` | Move to beginning of line      |
+| \`Ctrl + E\` | Move to end of line            |
+| \`Ctrl + Z\` | Return to privileged EXEC mode |
+| \`Tab\`      | Auto-complete command          |
+| \`?\`        | Context-sensitive help         |
+
+---
+
+### 🚨 **11. Real Exam Triggers (Be Familiar With)**
+
+* "**Switch boots up to 'Switch:' prompt**" → Missing or corrupted IOS.
+* "**Can't access switch remotely**" → Management IP or gateway misconfig.
+* "**Telnet insecure**" → Use SSH instead.
+* "**Banner MOTD**" → Legal warning displayed before login.
+* "**erase startup-config**" → Deletes saved config; requires reload.
+        `;
+
+        moduleContent[2] = `
+## ⚙️ **CCNA 2 – Module 2 Cheatsheet: Switching Concepts**
+
+---
+
+### 🧠 **1. Core Concepts to Memorize**
+
+| Concept                           | Description                                                           |
+| --------------------------------- | --------------------------------------------------------------------- |
+| **Switch**                        | A Layer 2 device that forwards frames based on **MAC addresses**.     |
+| **MAC Address Table (CAM Table)** | Table of known MAC addresses and their associated ports.              |
+| **Switching Logic**               | 1️⃣ Learn → 2️⃣ Forward/Filter → 3️⃣ Flood (if unknown).              |
+| **Unicast Frame**                 | Sent from one source to one destination.                              |
+| **Broadcast Frame**               | Sent to all devices in the same VLAN (MAC = FF:FF:FF:FF:FF:FF).       |
+| **Multicast Frame**               | Sent to multiple specific devices (uses special MAC prefix 01:00:5E). |
+
+---
+
+### 🔍 **2. Switch Forwarding Process**
+
+| Step            | Description                                                       |
+| --------------- | ----------------------------------------------------------------- |
+| **Learning**    | Switch records source MAC address + incoming port.                |
+| **Forwarding**  | Frame sent to the port associated with destination MAC.           |
+| **Flooding**    | If MAC unknown → switch sends frame to all ports (except source). |
+| **Aging Timer** | MAC table entries expire after **300 seconds** (default).         |
+
+---
+
+### 🧩 **3. Forwarding Methods**
+
+| Method                | Description                                      | Notes                               |
+| --------------------- | ------------------------------------------------ | ----------------------------------- |
+| **Store-and-Forward** | Receives entire frame → verifies CRC → forwards. | Most common; error checking.        |
+| **Cut-Through**       | Starts forwarding once destination MAC read.     | Faster but no error checking.       |
+| **Fragment-Free**     | Forwards after first 64 bytes (min frame size).  | Balance between speed and accuracy. |
+
+---
+
+### 🌐 **4. Collision and Broadcast Domains**
+
+| Concept              | Description                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| **Collision Domain** | Area where data packets can collide. <br> Each **switch port** = 1 collision domain. |
+| **Broadcast Domain** | Area where broadcast frames are propagated. <br> Each **VLAN** = 1 broadcast domain. |
+| **Router**           | Breaks up broadcast domains.                                                         |
+| **Switch**           | Breaks up collision domains.                                                         |
+
+---
+
+### 🧱 **5. Duplex and Speed**
+
+| Setting               | Meaning                                                            |
+| --------------------- | ------------------------------------------------------------------ |
+| **Half Duplex**       | Data can flow in one direction at a time. (Shared media like hubs) |
+| **Full Duplex**       | Data can flow in both directions simultaneously. (Modern switches) |
+| **Auto-Negotiation**  | Automatically selects best duplex/speed combination.               |
+| **Mismatched Duplex** | Causes collisions, slow performance.                               |
+
+---
+
+### 📡 **6. Switch Port Modes**
+
+| Mode                         | Description                                             |
+| ---------------------------- | ------------------------------------------------------- |
+| **Access Port**              | Belongs to only one VLAN; used by end devices.          |
+| **Trunk Port**               | Carries multiple VLANs using **802.1Q tagging**.        |
+| **Dynamic Auto / Desirable** | Automatically negotiates trunk (depends on both sides). |
+
+---
+
+### 🔐 **7. Port Security (Intro Concept)**
+
+| Concept              | Description                                                                                                |
+| -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Port Security**    | Limits which devices can connect to a port (based on MAC).                                                 |
+| **Sticky MAC**       | Automatically learns and saves MAC to running-config.                                                      |
+| **Violation Modes:** | 1️⃣ **Protect** (drops frames) <br> 2️⃣ **Restrict** (drops + logs) <br> 3️⃣ **Shutdown** (disables port). |
+
+**Enable Example:**
+\`\`\`bash
+interface fa0/1
+switchport mode access
+switchport port-security
+switchport port-security maximum 2
+switchport port-security violation shutdown
+switchport port-security mac-address sticky
+\`\`\`
+
+---
+
+### 🧾 **8. Important Show Commands**
+
+| Command                               | Purpose                               |
+| ------------------------------------- | ------------------------------------- |
+| \`show mac address-table\`              | Displays learned MACs and ports.      |
+| \`show interfaces status\`              | Displays interface status and VLANs.  |
+| \`show interfaces fa0/1\`               | Detailed stats for one port.          |
+| \`show running-config interface fa0/1\` | View port security & VLAN assignment. |
+| \`show port-security interface fa0/1\`  | Displays violation count & mode.      |
+
+---
+
+### ⚠️ **9. Common Issues**
+
+| Problem                           | Likely Cause                                       |
+| --------------------------------- | -------------------------------------------------- |
+| **No connectivity between VLANs** | VLAN misconfiguration (different VLANs).           |
+| **MAC flooding**                  | Attack filling MAC table to cause broadcast storm. |
+| **Slow performance**              | Duplex mismatch or CRC errors.                     |
+| **Broadcast storm**               | Redundant links without STP.                       |
+
+---
+
+### 📚 **10. Key Terminology**
+
+| Term               | Meaning                                             |
+| ------------------ | --------------------------------------------------- |
+| **CAM Table**      | Content Addressable Memory storing MACs.            |
+| **CRC**            | Cyclic Redundancy Check — verifies frame integrity. |
+| **Latency**        | Time delay in frame forwarding.                     |
+| **Bandwidth**      | Maximum data transfer rate.                         |
+| **Frame Flooding** | Sending unknown destination frames to all ports.    |
+| **Aging**          | Removal of old MAC entries after timer expires.     |
+
+---
+
+### 🧩 **11. Real Exam Trigger Phrases**
+
+| Question Clue                                              | What It Means               |
+| ---------------------------------------------------------- | --------------------------- |
+| "**Switch receives a frame with unknown destination MAC**" | Flooding occurs.            |
+| "**Which device separates broadcast domains?**"            | Router (or Layer 3 switch). |
+| "**Each port on a switch is its own…**"                    | Collision domain.           |
+| "**Switch forwards frame immediately after reading MAC**"  | Cut-through method.         |
+| "**Which forwarding method checks CRC?**"                  | Store-and-forward.          |
+
+---
+
+### ⚡ **12. Quick Command Recap**
+
+| Action             | Command                      |
+| ------------------ | ---------------------------- |
+| View MAC table     | \`show mac address-table\`     |
+| Clear MAC table    | \`clear mac address-table\`    |
+| View port details  | \`show interfaces fa0/1\`      |
+| View switch uptime | \`show version\`               |
+| View port VLAN     | \`show interfaces switchport\` |
+        `;
+
+        moduleContent[3] = `
+## 🧩 **CCNA 2 – Module 3 Cheatsheet: VLANs (Virtual Local Area Networks)**
+
+---
+
+### 🧠 **1. Core Concept**
+
+| Concept                | Description                                                             |
+| ---------------------- | ----------------------------------------------------------------------- |
+| **VLAN (Virtual LAN)** | Logical segmentation of a Layer 2 network to isolate broadcast domains. |
+| **Purpose**            | Improve security, reduce congestion, and simplify network management.   |
+| **Default VLAN**       | VLAN 1 — all ports are members until assigned elsewhere.                |
+| **Each VLAN**          | Operates as a separate subnet and broadcast domain.                     |
+
+---
+
+### 🗂️ **2. VLAN Types**
+
+| VLAN Type            | Description                                              |
+| -------------------- | -------------------------------------------------------- |
+| **Default VLAN (1)** | Exists on all switches; cannot be deleted.               |
+| **Data VLAN**        | Carries user-generated traffic.                          |
+| **Native VLAN**      | Used for untagged traffic on a trunk (default = VLAN 1). |
+| **Management VLAN**  | Used for switch management (recommended ≠ VLAN 1).       |
+| **Voice VLAN**       | Prioritizes VoIP traffic; QoS applied automatically.     |
+
+---
+
+### ⚙️ **3. VLAN Configuration**
+
+\`\`\`bash
+Switch# configure terminal
+Switch(config)# vlan 10
+Switch(config-vlan)# name SALES
+Switch(config)# interface fa0/1
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport access vlan 10
+\`\`\`
+
+* Assign each device port to its VLAN.
+* Each VLAN requires a separate IP subnet.
+
+---
+
+### 🌐 **4. VLAN Verification**
+
+| Command                            | Description                              |
+| ---------------------------------- | ---------------------------------------- |
+| \`show vlan brief\`                  | Lists all VLANs and port assignments.    |
+| \`show interfaces fa0/1 switchport\` | Displays VLAN mode and membership.       |
+| \`show interfaces trunk\`            | Displays trunk status and allowed VLANs. |
+| \`show running-config\`              | View VLAN configuration.                 |
+
+---
+
+### 🔀 **5. Trunking (802.1Q Encapsulation)**
+
+| Concept                  | Description                                          |
+| ------------------------ | ---------------------------------------------------- |
+| **Trunk Port**           | Carries traffic for multiple VLANs between switches. |
+| **Encapsulation Type**   | 802.1Q (industry standard).                          |
+| **Tagging**              | Adds VLAN ID to Ethernet frame header.               |
+| **Untagged Frames**      | Belong to the **native VLAN**.                       |
+| **Native VLAN Mismatch** | Causes connectivity issues and security alerts.      |
+
+**Configuration Example:**
+
+\`\`\`bash
+interface fa0/24
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99
+\`\`\`
+
+---
+
+### 🧩 **6. Dynamic Trunking Protocol (DTP)**
+
+| Mode                  | Description                       | Forms Trunk With               |
+| --------------------- | --------------------------------- | ------------------------------ |
+| **Access**            | Permanent non-trunk mode          | None                           |
+| **Trunk**             | Permanent trunk mode              | Access, Trunk, Desirable, Auto |
+| **Dynamic Auto**      | Waits to be invited               | Trunk, Desirable               |
+| **Dynamic Desirable** | Actively attempts trunk formation | Trunk, Desirable, Auto         |
+
+---
+
+### 🧱 **7. VLAN Ranges**
+
+| Range              | VLAN IDs  | Description                                             |
+| ------------------ | --------- | ------------------------------------------------------- |
+| **Normal Range**   | 1–1005    | Stored in VLAN database (vlan.dat)                      |
+| **Extended Range** | 1006–4094 | Used in larger networks (requires VTP transparent mode) |
+| **Reserved VLANs** | 0, 4095   | Not usable by users                                     |
+
+---
+
+### 🔒 **8. Security and Best Practices**
+
+| Recommendation                                        | Reason                       |
+| ----------------------------------------------------- | ---------------------------- |
+| Change **native VLAN** to non-default (e.g., VLAN 99) | Prevent VLAN hopping attacks |
+| Avoid using **VLAN 1** for user traffic               | Reduces attack surface       |
+| Create **dedicated management VLAN**                  | Isolate switch management    |
+| Disable unused ports                                  | Prevent unauthorized access  |
+| Assign unused ports to an **unused VLAN**             | Adds security layer          |
+
+---
+
+### ⚡ **9. Troubleshooting VLANs**
+
+| Symptom                           | Possible Cause                        |
+| --------------------------------- | ------------------------------------- |
+| **No connectivity between VLANs** | Inter-VLAN routing not configured.    |
+| **Host not in VLAN**              | Access port assigned to wrong VLAN.   |
+| **Native VLAN mismatch**          | Trunks use different native VLANs.    |
+| **Trunk not forming**             | DTP mismatch or one side access mode. |
+| **Ping fails between switches**   | VLANs not allowed on trunk.           |
+
+---
+
+### 🧾 **10. Key Show/Verify Commands**
+
+| Command                            | Purpose                                       |
+| ---------------------------------- | --------------------------------------------- |
+| \`show vlan\`                        | Displays VLANs configured and assigned ports. |
+| \`show interfaces trunk\`            | Shows trunk ports, allowed/native VLANs.      |
+| \`show interfaces switchport\`       | Shows VLAN and mode per port.                 |
+| \`show mac address-table vlan [id]\` | Displays MACs in that VLAN.                   |
+| \`show running-config\`              | Check VLAN-related commands.                  |
+
+---
+
+### 🧠 **11. Common Exam Triggers**
+
+| Question Clue                                                | Remember This                                   |
+| ------------------------------------------------------------ | ----------------------------------------------- |
+| "**Which VLAN carries untagged frames on a trunk?**"         | Native VLAN                                     |
+| "**Which VLAN cannot be deleted or renamed?**"               | VLAN 1                                          |
+| "**How many broadcast domains on a switch with 4 VLANs?**"   | 4                                               |
+| "**Why devices on different VLANs can't communicate?**"      | Need inter-VLAN routing                         |
+| "**What happens when VLAN doesn't exist on both switches?**" | Traffic dropped on trunk                        |
+| "**What is DTP?**"                                           | Cisco protocol that automates trunk negotiation |
+
+---
+
+### 🧩 **12. Quick Memory Aids**
+
+* 🧱 **"VLANs = Virtual Walls"** – They isolate groups in the same switch.
+* 🌉 **"Trunks = Bridges between walls"** – Carry all VLANs between switches.
+* ⚠️ **"VLAN 1 is default, but don't use it for management."**
+* 🧾 **"802.1Q adds a 4-byte tag"** – VLAN ID field inside Ethernet frame.
+* 🚧 **"Native VLAN untagged!"** – Appears in Wireshark without VLAN tag.
+        `;
+
+        moduleContent[4] = `
+## 🧭 **CCNA 2 – Module 4 Cheatsheet: Inter-VLAN Routing**
+
+---
+
+### 🧠 **1. Core Concept**
+
+| Concept                | Description                                                                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **Inter-VLAN Routing** | Allows devices in different VLANs (different subnets) to communicate.                                                   |
+| **Why Needed?**        | VLANs isolate broadcast domains — a **Layer 3 device** (router or multilayer switch) is required to route between them. |
+| **Each VLAN**          | = Separate IP subnet.                                                                                                   |
+
+---
+
+### ⚙️ **2. Methods of Inter-VLAN Routing**
+
+| Method                                | Description                                                                    | Devices Used      |
+| ------------------------------------- | ------------------------------------------------------------------------------ | ----------------- |
+| **Legacy Inter-VLAN Routing**         | Each VLAN connected to a **physical router interface**.                        | Router + Switch   |
+| **Router-on-a-Stick (ROAS)**          | One router interface with multiple **subinterfaces**, each assigned to a VLAN. | Router (Layer 3)  |
+| **Layer 3 Switch Inter-VLAN Routing** | Uses **Switch Virtual Interfaces (SVIs)**.                                     | Multilayer Switch |
+
+---
+
+### 🧩 **3. Legacy Routing (Old Method)**
+
+* Each VLAN connected to **dedicated router port**.
+* Example:
+  * VLAN 10 → Router Fa0/0
+  * VLAN 20 → Router Fa0/1
+* ❌ Inefficient, requires multiple cables.
+
+---
+
+### ⚡ **4. Router-on-a-Stick (ROAS)**
+
+**Most common exam configuration**
+
+**Concept:** One physical router interface handles multiple VLANs through *subinterfaces* using 802.1Q encapsulation.
+
+**Configuration Example:**
+
+\`\`\`bash
+interface g0/0
+ no shutdown
+!
+interface g0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+!
+interface g0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+!
+interface g0/0.99
+ encapsulation dot1Q 99 native
+ ip address 192.168.99.1 255.255.255.0
+\`\`\`
+
+**Key Notes:**
+
+* \`encapsulation dot1Q [vlan-id]\` = Assign VLAN to subinterface.
+* Use \`native\` keyword for native VLAN.
+* Default gateway for hosts = router subinterface IP.
+
+---
+
+### 🧮 **5. Layer 3 Switch Routing (SVI)**
+
+**Concept:** The switch performs routing internally (no router needed).
+
+**Configuration Example:**
+
+\`\`\`bash
+ip routing
+interface vlan 10
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+!
+interface vlan 20
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
+\`\`\`
+
+**Enable routing:** \`ip routing\`
+**Verify:** \`show ip interface brief\`
+
+---
+
+### 🧱 **6. VLAN and Subnet Pairing**
+
+| VLAN           | Subnet          | Gateway      |
+| -------------- | --------------- | ------------ |
+| VLAN 10        | 192.168.10.0/24 | 192.168.10.1 |
+| VLAN 20        | 192.168.20.0/24 | 192.168.20.1 |
+| VLAN 99 (Mgmt) | 192.168.99.0/24 | 192.168.99.1 |
+
+Each VLAN **must** be in a **unique subnet**.
+
+---
+
+### 🧾 **7. Verification Commands**
+
+| Command                   | Description                               |
+| ------------------------- | ----------------------------------------- |
+| \`show ip interface brief\` | Lists all interfaces and IP addresses.    |
+| \`show interfaces trunk\`   | Ensures switch port to router is trunked. |
+| \`show vlan brief\`         | Confirms port-to-VLAN assignments.        |
+| \`show running-config\`     | Displays router/switch configuration.     |
+| \`ping\`                    | Test inter-VLAN communication.            |
+| \`traceroute\`              | Tests path to destination VLAN.           |
+
+---
+
+### 🧩 **8. Troubleshooting Tips**
+
+| Symptom                                         | Likely Cause                                        |
+| ----------------------------------------------- | --------------------------------------------------- |
+| **PCs in different VLANs can't ping**           | Inter-VLAN routing not enabled or wrong IP gateway. |
+| **One VLAN works, another fails**               | Missing subinterface or SVI.                        |
+| **No response from router**                     | Switch trunk misconfigured.                         |
+| **Subinterface error: "encapsulation not set"** | Missing \`encapsulation dot1Q\` command.              |
+| **Native VLAN mismatch warning**                | Both sides of trunk use different native VLAN IDs.  |
+
+---
+
+### 🔐 **9. Important Notes**
+
+* Each **VLAN → Subnet → Default Gateway** pattern must match.
+* Router-on-a-stick link **must be a trunk**.
+* Layer 3 switch routing is faster than router-on-a-stick (no external hop).
+* **Default gateway** of a PC = IP of VLAN interface (SVI or subinterface).
+* If trunk fails, **no inter-VLAN communication** is possible.
+
+---
+
+### 🧠 **10. Exam Triggers**
+
+| Question Clue                                          | Remember This                                   |
+| ------------------------------------------------------ | ----------------------------------------------- |
+| "**Single interface routes multiple VLANs**"           | Router-on-a-stick.                              |
+| "**Switch handles routing without external router**"   | Layer 3 switch (SVI).                           |
+| "**Inter-VLAN communication fails despite IP config**" | Trunk misconfiguration or missing \`ip routing\`. |
+| "**Router subinterface missing encapsulation**"        | Add \`encapsulation dot1Q [vlan]\`.               |
+| "**Default gateway not set**"                          | End device cannot reach other VLANs.            |
+
+---
+
+### 🧩 **11. Quick Command Recap**
+
+| Task                       | Command                    |
+| -------------------------- | -------------------------- |
+| Enable routing (L3 switch) | \`ip routing\`               |
+| Create VLAN interface      | \`interface vlan [id]\`      |
+| Set VLAN IP                | \`ip address [IP] [mask]\`   |
+| Router subinterface        | \`interface g0/0.[vlan-id]\` |
+| Trunk setup (switch side)  | \`switchport mode trunk\`    |
+| View VLANs                 | \`show vlan brief\`          |
+| Verify trunk               | \`show interfaces trunk\`    |
+
+---
+
+### ⚡ **12. Easy Mnemonics**
+
+* 💡 **"1 link, many VLANs = Router-on-a-Stick."**
+* 🧱 **"Each VLAN = unique subnet."**
+* 🔄 **"Trunk between router & switch = lifeline."**
+* 🔑 **"SVI needs IP + no shutdown + ip routing."**
+        `;
+
+        moduleContent[5] = `
+## 🧠 CCNA Module 5 Cheatsheet: **Spanning Tree Protocol (STP)**
+
+### 🌳 1. Purpose of STP
+
+* **STP prevents Layer 2 loops** in a switched network.
+* **Loops** can cause:
+  * Broadcast storms
+  * Multiple frame copies
+  * MAC address table instability
+* STP ensures **one logical path** between switches while **blocking redundant paths**.
+
+---
+
+### ⚙️ 2. Key STP Concepts
+
+| Term                     | Description                                                                      |
+| ------------------------ | -------------------------------------------------------------------------------- |
+| **Root Bridge**          | The central switch chosen by STP. All other switches calculate best path to it.  |
+| **Bridge ID (BID)**      | Used to elect the Root Bridge. BID = Bridge Priority + MAC Address.              |
+| **Bridge Priority**      | Default = 32768 (lower is better). You can change it to influence root election. |
+| **Root Port (RP)**       | The port with the best path (lowest cost) to the root bridge.                    |
+| **Designated Port (DP)** | The port with the lowest path cost on a segment; forwards traffic.               |
+| **Blocked Port**         | Port that does not forward frames to prevent loops.                              |
+
+---
+
+### ⚡ 3. STP Port States
+
+1. **Blocking** → No data frames forwarded (listens to BPDUs only).
+2. **Listening** → Prepares to participate in STP, discards frames.
+3. **Learning** → Learns MAC addresses, doesn't forward data yet.
+4. **Forwarding** → Fully operational, forwards traffic.
+5. **Disabled** → Administratively shut down.
+
+---
+
+### 🧩 4. STP Port Roles Summary
+
+| Role                      | Description                               |
+| ------------------------- | ----------------------------------------- |
+| **Root Port (RP)**        | Best path to root bridge.                 |
+| **Designated Port (DP)**  | Best port on each LAN segment.            |
+| **Non-Designated Port**   | Placed in blocking to prevent loops.      |
+| **Alternate Port** (RSTP) | Backup path to root bridge.               |
+| **Backup Port** (RSTP)    | Redundant port on the same segment as DP. |
+
+---
+
+### 🧮 5. STP Path Cost
+
+* **Cost = link speed** (lower is better).
+
+| Link Speed | Cost |
+|-------------|------|
+| 10 Mbps | 100 |
+| 100 Mbps | 19 |
+| 1 Gbps | 4 |
+| 10 Gbps | 2 |
+
+---
+
+### 🗳️ 6. Root Bridge Election Process
+
+1. Switches exchange **Bridge Protocol Data Units (BPDUs)**.
+2. The **lowest Bridge ID** wins.
+   * Bridge ID = Priority (2 bytes) + MAC (6 bytes).
+3. If priorities are equal, the switch with the **lowest MAC address** becomes the root.
+
+---
+
+### 🛰️ 7. Types of STP
+
+| Type              | Description                                             |
+| ----------------- | ------------------------------------------------------- |
+| **STP (802.1D)**  | Original version; slow convergence (~30-50s).           |
+| **RSTP (802.1w)** | Rapid Spanning Tree Protocol; faster convergence (~6s). |
+| **PVST+**         | Cisco's Per-VLAN STP; runs separate STP per VLAN.       |
+| **RSTP PVST+**    | Cisco's rapid version per VLAN.                         |
+| **MSTP (802.1s)** | Multiple STP instances for grouped VLANs.               |
+
+---
+
+### ⚡ 8. BPDU (Bridge Protocol Data Unit)
+
+* Used by switches to share STP information.
+* Sent every **2 seconds by default**.
+* Two main BPDU types:
+  1. **Configuration BPDU** – carries STP info.
+  2. **TCN BPDU (Topology Change Notification)** – signals a change in the network.
+
+---
+
+### 🚀 9. Convergence Time (Traditional STP)
+
+* Up to **50 seconds**:
+  * Listening (15s)
+  * Learning (15s)
+  * Forward Delay (15s each phase)
+  * Hello & Max Age timers
+
+RSTP improves this using **handshakes** instead of waiting timers.
+
+---
+
+### 🧱 10. STP Timers (default values)
+
+| Timer             | Description                      | Default |
+| ----------------- | -------------------------------- | ------- |
+| **Hello Time**    | BPDU send interval               | 2 sec   |
+| **Forward Delay** | Time spent in listening/learning | 15 sec  |
+| **Max Age**       | Time before BPDU info expires    | 20 sec  |
+
+---
+
+### 🔍 11. Troubleshooting & Commands
+
+* \`show spanning-tree\` → Displays STP status.
+* \`spanning-tree vlan [id] root primary\` → Forces switch to become root.
+* \`spanning-tree portfast\` → Immediately moves port to forwarding (for end hosts only).
+* \`spanning-tree bpduguard enable\` → Protects from receiving BPDUs on access ports.
+
+---
+
+### 💡 12. Exam Pointers
+
+* Always **lower the bridge priority** to make a switch the root.
+* Remember **cost = inverse of link speed**.
+* **RSTP** is preferred in modern networks.
+* **BPDU Guard + PortFast** are **best friends** on access ports.
+* **Blocking ports** prevent loops, not failures.
+        `;
+
+        moduleContent[6] = `
+## ⚙️ CCNA Module 6 Cheatsheet: **EtherChannel and Redundancy**
+
+---
+
+### 🧠 1. Purpose of EtherChannel
+
+* **EtherChannel** combines **multiple physical links** into **one logical link**.
+* Provides:
+  * **Higher bandwidth** (load-balancing)
+  * **Link redundancy**
+  * **Simplified management** (one logical interface)
+* Seen as a **single interface** by STP and routing protocols.
+
+---
+
+### 🧩 2. Benefits
+
+✅ Increased bandwidth (e.g., 4 × 1 Gbps = 4 Gbps total)
+✅ Link redundancy – if one link fails, traffic continues on others
+✅ STP treats EtherChannel as **one port**, preventing blocking of individual links
+✅ Easier config and troubleshooting
+
+---
+
+### ⚙️ 3. EtherChannel Technologies
+
+| Mode                                         | Description                                         | Protocol      |
+| -------------------------------------------- | --------------------------------------------------- | ------------- |
+| **PAgP (Port Aggregation Protocol)**         | Cisco proprietary, automatically negotiates channel | Cisco only    |
+| **LACP (Link Aggregation Control Protocol)** | IEEE 802.3ad standard, multi-vendor compatible      | Open standard |
+| **Static (Manual)**                          | Manually configures aggregation without negotiation | None          |
+
+---
+
+### 🗳️ 4. EtherChannel Modes
+
+| Protocol   | Active Modes | Passive Modes | Notes                               |
+| ---------- | ------------ | ------------- | ----------------------------------- |
+| **PAgP**   | desirable    | auto          | Both must agree to form a channel   |
+| **LACP**   | active       | passive       | Both must agree; active talks first |
+| **Static** | on           | on            | No negotiation, manually forced     |
+
+> ⚠️ Mismatch (e.g., one side LACP, other static) = no channel formed.
+
+---
+
+### 🔢 5. Common EtherChannel Requirements
+
+* Same **speed & duplex** on all links
+* Same **VLAN membership** (trunk/access consistency)
+* Same **switch port mode** (all trunk or all access)
+* **No dynamic negotiation mismatch**
+* **Max 8 physical links** per EtherChannel
+
+---
+
+### 📦 6. Load Balancing
+
+* Switch uses **hashing algorithms** to distribute traffic.
+* Common methods:
+  * Source MAC / Destination MAC
+  * Source IP / Destination IP
+  * Source–Destination pairs combined
+
+**Command Example:**
+\`\`\`
+switch(config)# port-channel load-balance src-dst-mac
+\`\`\`
+
+---
+
+### 🧱 7. Interface Configuration Example
+
+**Static EtherChannel:**
+\`\`\`
+Switch(config)# interface range g0/1 - 2
+Switch(config-if-range)# channel-group 1 mode on
+Switch(config)# interface port-channel 1
+Switch(config-if)# switchport mode trunk
+\`\`\`
+
+**LACP:**
+\`\`\`
+Switch(config)# interface range g0/1 - 2
+Switch(config-if-range)# channel-group 1 mode active
+\`\`\`
+
+**PAgP:**
+\`\`\`
+Switch(config)# interface range g0/1 - 2
+Switch(config-if-range)# channel-group 1 mode desirable
+\`\`\`
+
+---
+
+### 🧭 8. Verification Commands
+
+| Command                                       | Description                           |
+| --------------------------------------------- | ------------------------------------- |
+| \`show etherchannel summary\`                   | Displays EtherChannel status          |
+| \`show interfaces port-channel\`                | Shows details about logical interface |
+| \`show running-config interface port-channel1\` | Displays config                       |
+| \`show spanning-tree interface port-channel1\`  | Checks STP role                       |
+
+> **Flags in summary output**:
+> \`P\` = in port-channel, \`S\` = layer2, \`R\` = in use, \`U\` = up
+
+---
+
+### 🧩 9. EtherChannel and STP
+
+* STP views EtherChannel as **a single logical link**.
+* Prevents **individual link blocking** — only blocks if the **entire bundle fails**.
+* **Faster convergence** and **loop prevention** work hand-in-hand.
+
+---
+
+### ⚡ 10. Redundancy Concepts
+
+| Feature               | Description                                         |
+| --------------------- | --------------------------------------------------- |
+| **Link Redundancy**   | Uses multiple links to prevent single link failure. |
+| **Device Redundancy** | Backup switch/router if primary fails.              |
+| **Path Redundancy**   | Multiple paths between devices for fault tolerance. |
+
+---
+
+### 🔁 11. Redundancy in Switching
+
+* **STP** + **EtherChannel** = Prevents loops while keeping backups ready.
+* **PortFast + BPDU Guard** → Protect end devices.
+* **Rapid STP (RSTP)** → Speeds up reconvergence after a failure.
+
+---
+
+### 🧮 12. EtherChannel Troubleshooting Tips
+
+| Issue                  | Cause                       | Fix                               |
+| ---------------------- | --------------------------- | --------------------------------- |
+| Ports not bundling     | Mode mismatch               | Use same protocol (LACP↔LACP)     |
+| Err-disabled port      | Config mismatch             | Remove and re-add to group        |
+| VLAN mismatch          | Access/Trunk mismatch       | Ensure same mode on both ends     |
+| STP blocking all ports | Wrong load-balance / mis-ID | Check \`show etherchannel summary\` |
+
+---
+
+### 💡 13. Exam Key Takeaways
+
+* **EtherChannel = Logical aggregation** of multiple physical links.
+* **PAgP** = Cisco only; **LACP** = IEEE standard.
+* **Active–Passive (LACP)** or **Desirable–Auto (PAgP)** combos form channels.
+* **STP sees EtherChannel as one link**.
+* Verify using \`show etherchannel summary\`.
+* Keep **same settings** on all bundled ports.
+        `;
+
+        // Function to convert markdown-like content to HTML
+        function markdownToHtml(markdown) {
+            let html = markdown;
+            
+            // First, handle tables before other processing
+            html = html.replace(/(\|.*\|[\r\n]+)+/gm, function(match) {
+                const lines = match.trim().split(/[\r\n]+/);
+                if (lines.length < 2) return match;
+                
+                // Parse header row
+                const headerRow = lines[0];
+                const separatorRow = lines[1];
+                const dataRows = lines.slice(2);
+                
+                // Check if it's a valid table (has separator row with dashes)
+                if (!separatorRow.includes('-')) return match;
+                
+                // Extract header cells
+                const headerCells = headerRow.split('|')
+                    .map(cell => cell.trim())
+                    .filter(cell => cell);
+                
+                // Build table HTML
+                let tableHtml = '<table>\n<thead>\n<tr>';
+                headerCells.forEach(cell => {
+                    tableHtml += `<th>${cell}</th>`;
+                });
+                tableHtml += '</tr>\n</thead>\n<tbody>\n';
+                
+                // Process data rows
+                dataRows.forEach(row => {
+                    if (row.trim()) {
+                        const cells = row.split('|')
+                            .map(cell => cell.trim())
+                            .filter(cell => cell);
+                        
+                        if (cells.length > 0) {
+                            tableHtml += '<tr>';
+                            cells.forEach(cell => {
+                                tableHtml += `<td>${cell}</td>`;
+                            });
+                            tableHtml += '</tr>\n';
+                        }
+                    }
+                });
+                
+                tableHtml += '</tbody>\n</table>\n\n';
+                return tableHtml;
+            });
+            
+            // Then handle other markdown elements
+            html = html
+                // Headers
+                .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+                
+                // Bold text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                
+                // Italic text (single asterisk)
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                
+                // Code blocks
+                .replace(/```bash\n([\s\S]*?)\n```/g, '<pre><code class="language-bash">$1</code></pre>')
+                .replace(/```\n([\s\S]*?)\n```/g, '<pre><code>$1</code></pre>')
+                
+                // Inline code
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                
+                // Horizontal rules
+                .replace(/^---$/gm, '<hr>')
+                
+                // Lists (unordered)
+                .replace(/^\* (.+)$/gm, '<li>$1</li>')
+                .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+                
+                // Paragraphs - handle line breaks and paragraphs
+                .replace(/\n\s*\n/g, '</p><p>')
+                .replace(/^(?!<(?:h[1-6]|table|ul|ol|li|hr|pre|code))/gm, '<p>')
+                .replace(/(?<!>)$/gm, '</p>')
+                
+                // Clean up extra paragraph tags
+                .replace(/<p><\/p>/g, '')
+                .replace(/<p>(<h[1-6]>)/g, '$1')
+                .replace(/(<\/h[1-6]>)<\/p>/g, '$1')
+                .replace(/<p>(<hr>)<\/p>/g, '$1')
+                .replace(/<p>(<table>)/g, '$1')
+                .replace(/(<\/table>)<\/p>/g, '$1')
+                .replace(/<p>(<pre>)/g, '$1')
+                .replace(/(<\/pre>)<\/p>/g, '$1')
+                .replace(/<p>(<ul>)/g, '$1')
+                .replace(/(<\/ul>)<\/p>/g, '$1')
+                
+                // Handle line breaks within paragraphs
+                .replace(/<p>([^<]*)\n([^<]*)<\/p>/g, '<p>$1<br>$2</p>');
+            
+            return html;
+        }
+
+        // Load module content
+        function loadModule(moduleNumber) {
+            const loading = document.getElementById('loading');
+            const content = document.getElementById('module-content');
+            
+            // Show loading
+            loading.style.display = 'block';
+            content.style.display = 'none';
+            
+            // Update active button
+            document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-module="${moduleNumber}"]`).classList.add('active');
+            
+            // Simulate loading delay and convert markdown to HTML
+            setTimeout(() => {
+                const htmlContent = markdownToHtml(moduleContent[moduleNumber]);
+                content.innerHTML = htmlContent;
+                
+                // Hide loading, show content
+                loading.style.display = 'none';
+                content.style.display = 'block';
+            }, 300);
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load Module 1 by default
+            loadModule(1);
+            
+            // Add click listeners to module buttons
+            document.querySelectorAll('.module-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const moduleNumber = parseInt(this.dataset.module);
+                    loadModule(moduleNumber);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

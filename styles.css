@@ -1,0 +1,355 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-bottom: 3px solid #667eea;
+}
+
+header h1 {
+    color: #2c3e50;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+header p {
+    color: #7f8c8d;
+    font-size: 1.1em;
+}
+
+/* Navigation */
+.module-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+}
+
+.module-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.module-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.module-btn.active {
+    background: linear-gradient(45deg, #2c3e50, #34495e);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Content area */
+.content-area {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+#loading {
+    text-align: center;
+    font-size: 1.2em;
+    color: #667eea;
+    padding: 50px;
+}
+
+#module-content {
+    display: none;
+}
+
+/* Typography */
+#module-content h1 {
+    color: #2c3e50;
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #667eea;
+}
+
+#module-content h2 {
+    color: #34495e;
+    font-size: 1.8em;
+    margin: 30px 0 15px 0;
+    padding: 10px 0;
+    border-left: 5px solid #667eea;
+    padding-left: 15px;
+    background: #f8f9fa;
+    border-radius: 0 5px 5px 0;
+}
+
+#module-content h3 {
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin: 25px 0 15px 0;
+    padding: 8px 0;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+#module-content p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+th {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ecf0f1;
+    vertical-align: top;
+}
+
+tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+tr:hover {
+    background: #e3f2fd;
+    transition: background 0.2s ease;
+}
+
+/* Code styling */
+code {
+    background: #f1f3f4;
+    color: #c7254e;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+    border: 1px solid #e1e5e9;
+}
+
+pre {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+    border-left: 5px solid #667eea;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    border: none;
+    font-size: 0.9em;
+}
+
+/* Lists */
+ul, ol {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* Horizontal rules */
+hr {
+    border: none;
+    height: 3px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    margin: 30px 0;
+    border-radius: 2px;
+}
+
+/* Special highlighting */
+strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+em {
+    color: #667eea;
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* Emoji and special characters */
+#module-content h1:first-child,
+#module-content h2,
+#module-content h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #7f8c8d;
+    border-top: 2px solid #ecf0f1;
+    background: #f8f9fa;
+    border-radius: 0 0 10px 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .module-nav {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .module-btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .content-area {
+        padding: 20px 15px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    #module-content h1 {
+        font-size: 1.8em;
+    }
+    
+    #module-content h2 {
+        font-size: 1.5em;
+    }
+    
+    table {
+        font-size: 0.9em;
+    }
+    
+    th, td {
+        padding: 10px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+    
+    .module-btn {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .content-area {
+        padding: 15px 10px;
+    }
+    
+    table {
+        font-size: 0.8em;
+    }
+    
+    th, td {
+        padding: 8px 6px;
+    }
+    
+    pre {
+        padding: 15px;
+        font-size: 0.8em;
+    }
+}
+
+/* Animation for smooth transitions */
+.content-area {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+    }
+    
+    .container {
+        box-shadow: none;
+        max-width: none;
+    }
+    
+    .module-nav {
+        display: none;
+    }
+    
+    header, footer {
+        border: none;
+        background: white;
+    }
+}
